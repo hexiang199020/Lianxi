@@ -1,10 +1,53 @@
-<ion-view view-title="Page">
-  <div ng-if="vm.activated">
-    <ion-content class="padding">
-      {{vm.message}}
-      <div>
-        <button class="button" ng-click="vm.goPageTwo()">Go Page Two</button>
+<ion-view view-title="登录">
+  <loading full-screen="false" loading="lc.loading"></loading>
+  <ion-content>
+    <div style="height:200px" layout="row" layout-align="center center">
+      <img class="logo-size" src="ifast-logo.png"/>
+    </div>
+    <div class="text-center-gray font24-and-bold margin-bottom8">欢迎登录</div>
+    <div layout>
+      <div flex class="margin-top10">
+        <md-divider></md-divider>
       </div>
-    </ion-content>
-  </div>
+      <div class="text-center-gray margin-left10 margin-right10">WELCOME</div>
+      <div class="margin-top10">
+        <md-divider></md-divider>
+      </div>
+    </div>
+
+    <form id="loginForm" name="loginForm" ng-submit="loginForm.$valid && lc.login(lc.user)" novalidate>
+      <div layout="column" layout-align="center center">
+        <div>
+          <md-icon class="svg-fill-black" md-svg-icon='account'></md-icon>
+        </div>
+        <md-input-containter>
+          <label>用户名</label>
+          <input name="username" ng-model="lc.user.username" type="text" input-cleaner required/>
+          <div ng-show="loginForm.$submitted || loginForm.username.$touched" ng-messages="loginForm.username.$error">
+            <div ng-message="required">必填</div>
+          </div>
+        </md-input-containter>
+      </div>
+      <div class="icon-input width60per" layout="row" layout-align="center start">
+        <div>
+          <md-icon class="svg-fill-black" md-svg-icon='password'></md-icon>
+        </div>
+        <md-input-containter>
+          <label>密码</label>
+          <input name="password" ng-model="lc.user.password" type="password" input-cleaner required/>
+          <div ng-show="loginForm.$submitted || loginForm.password.$touched" ng-messages="loginForm.password.$error">
+            <div ng-message="required">必填</div>
+          </div>
+        </md-input-containter>
+      </div>
+
+      <md-button class="md-raised md-primary" ng-click="lc.changedAccount()">换账号</md-button>
+
+      <md-button type="submit" class="md-raised md-primary width60per">登录</md-button>
+      <div class="width60per" layout="row" layout-align="space-around center">
+        <div class="padding text-color-gray" ng-click="lc.register()" ng-if="lc.showRegisterButton">扫码开户</div>
+        <div class="padding text-color-gray" ng-click="lc.passwordRecovery()">{{'forgetPassword' | translate}}？</div>
+      </div>
+    </form>
+  </ion-content>
 </ion-view>

@@ -1,3 +1,4 @@
+
 // app 一开始跑的方法
 export default function AppRun($ionicPlatform, $http) {
   'ngInject';
